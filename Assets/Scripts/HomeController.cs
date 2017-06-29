@@ -13,6 +13,11 @@ public class HomeController : MonoBehaviour {
         SceneManager.LoadScene("Credits");
 
     }
+    public void BtPlay()
+    {
+        SceneManager.LoadScene("Play");
+
+    }
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
