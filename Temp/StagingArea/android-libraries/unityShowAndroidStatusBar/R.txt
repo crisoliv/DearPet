@@ -1,2 +1,0 @@
-int style UnityStatusBarTheme 0x7f020000
-int style UnityTransparentStatusBarTheme 0x7f020001
