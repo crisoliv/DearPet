@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\CreditsController.cs" />
      <Compile Include="Assets\Scripts\HomeController.cs" />
      <Compile Include="Assets\Scripts\LoginController.cs" />
+     <Compile Include="Assets\Scripts\Models\Message.cs" />
      <Compile Include="Assets\Scripts\Models\Player.cs" />
      <Compile Include="Assets\Scripts\NetworkRequests\UserLogin.cs" />
      <Compile Include="Assets\Scripts\Splash.cs" />
