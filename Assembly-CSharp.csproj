@@ -46,6 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ApiAiSDK\AndroidRecognitionResult.cs" />
+     <Compile Include="Assets\ApiAiSDK\AndroidRecognizer.cs" />
+     <Compile Include="Assets\ApiAiSDK\ApiAiUnity.cs" />
+     <Compile Include="Assets\ApiAiSDK\ResultWrapper.cs" />
+     <Compile Include="Assets\Examples\ApiAiModule.cs" />
      <Compile Include="Assets\Scripts\CreditsController.cs" />
      <Compile Include="Assets\Scripts\HomeController.cs" />
      <Compile Include="Assets\Scripts\LoginController.cs" />
@@ -74,6 +79,12 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>/Volumes/Partition2/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+ <Reference Include="ApiAiSDK">
+ <HintPath>/Users/JhonnyBarbosa/Google Drive/7 PERIODO UFAM/SD/ProjetoFinalTaka/DearPet/Assets/ApiAiSDK/lib/ApiAiSDK.dll</HintPath>
+ </Reference>
+ <Reference Include="fastJSON">
+ <HintPath>/Users/JhonnyBarbosa/Google Drive/7 PERIODO UFAM/SD/ProjetoFinalTaka/DearPet/Assets/ApiAiSDK/lib/fastJSON.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
