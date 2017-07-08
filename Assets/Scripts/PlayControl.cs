@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 public class PlayControl : MonoBehaviour {
 
     bool whichItem = true;
+    bool customUsing = true;
     public Camera camera;
+    RectTransform customRect;
 
     public GameObject titleDearPet;
     public GameObject titleCustom;
 
     public GameObject itemPlay;
     public GameObject itemCustom;
+    public GameObject itemCustomUsing;
 
     public GameObject itemPlayBack;
     public GameObject itemCustomBack;
@@ -29,7 +32,8 @@ public class PlayControl : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Screen.fullScreen = false;
+        Screen.fullScreen = true;
+        customRect = itemCustom.GetComponent<RectTransform>();
         //camera = GetComponent<Camera>();
     }
 
@@ -54,7 +58,7 @@ public class PlayControl : MonoBehaviour {
             camera.backgroundColor = colorWhite;
 
             whichItem = false;
-        }else {
+        } else {
             titleDearPet.SetActive(true);
             titleCustom.SetActive(false);
 
@@ -71,7 +75,18 @@ public class PlayControl : MonoBehaviour {
             camera.backgroundColor = colorBlue;
 
             whichItem = true;
-        }        
+        }
+    }
+
+    public void BtUseItemCustomization()
+    {
+        /*customRect.localPosition = new Vector3 (0, -355, 0);
+        print(customRect.localPosition);*/
+        
+        //if (customUsing)
+        //{
+            itemCustomUsing.SetActive(true);
+        //}
     }
 
     private void LateUpdate()
