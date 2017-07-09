@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoginController : MonoBehaviour {
 
-	private static string URL = "https://dearpet.000webhostapp.com/login_service.php?";
+	private static string URL = "http://dearpet.000webhostapp.com/login_service.php?";
 
 	public InputField username;
 	public InputField password; 
