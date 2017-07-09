@@ -7,15 +7,22 @@ public class PlayControl : MonoBehaviour {
 
     bool whichItem = true;
     bool customUsing = true;
+    int nextItemCustom = 0;
     public Camera camera;
     RectTransform customRect;
 
     public GameObject titleDearPet;
     public GameObject titleCustom;
 
+    public GameObject btItemCustom;
+    public GameObject btNextItemCustom;
+    public GameObject btPrevItemCustom;
+
     public GameObject itemPlay;
     public GameObject itemCustom;
     public GameObject itemCustomUsing;
+    public GameObject itemCustom2;
+    public GameObject itemCustomUsing2;
 
     public GameObject itemPlayBack;
     public GameObject itemCustomBack;
@@ -45,6 +52,10 @@ public class PlayControl : MonoBehaviour {
             titleDearPet.SetActive(false);
             titleCustom.SetActive(true);
 
+            btItemCustom.SetActive(true);
+            btNextItemCustom.SetActive(true);
+            btPrevItemCustom.SetActive(true);
+
             itemCustom.SetActive(true);
             itemCustomBack.SetActive(true);
             txtCustom.SetActive(false);
@@ -62,11 +73,16 @@ public class PlayControl : MonoBehaviour {
             titleDearPet.SetActive(true);
             titleCustom.SetActive(false);
 
+            btItemCustom.SetActive(false);
+            btNextItemCustom.SetActive(false);
+            btPrevItemCustom.SetActive(false);
+
             itemPlay.SetActive(true);
             itemPlayBack.SetActive(true);
             txtCustom.SetActive(true);
 
             itemCustom.SetActive(false);
+            itemCustom2.SetActive(false);
             itemCustomBack.SetActive(false);
             txtBack.SetActive(false);
 
@@ -83,10 +99,34 @@ public class PlayControl : MonoBehaviour {
         /*customRect.localPosition = new Vector3 (0, -355, 0);
         print(customRect.localPosition);*/
         
-        //if (customUsing)
-        //{
+        if (nextItemCustom == 0)
+        {
             itemCustomUsing.SetActive(true);
-        //}
+            itemCustomUsing2.SetActive(false);
+        }
+        else {
+            itemCustomUsing2.SetActive(true);
+            itemCustomUsing.SetActive(false);
+        }
+    }
+
+    public void BtNextItem()
+    {
+        /*customRect.localPosition = new Vector3 (0, -355, 0);
+        print(customRect.localPosition);*/
+
+        if (nextItemCustom == 0)
+        {
+            itemCustom.SetActive(false);
+            itemCustom2.SetActive(true);
+            nextItemCustom++;
+        }
+        else
+        {
+            itemCustom.SetActive(true);
+            itemCustom2.SetActive(false);
+            nextItemCustom--;
+        }
     }
 
     private void LateUpdate()
