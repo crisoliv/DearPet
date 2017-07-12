@@ -54,7 +54,7 @@ public class ApiAiModule : MonoBehaviour
 
     string returnFood;
     Image foodImage;
-    string[] foods = { "apple", "banana", "orange", "broccoli", "carrot", "chocolate", "egg", "watermelon", "icecream", "cake" };
+    string[] foods = { "apple", "banana", "bread", "broccoli", "carrot", "chocolate", "egg", "watermelon", "icecream", "cake" };
     int index = 0;
 
     private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -157,7 +157,7 @@ public class ApiAiModule : MonoBehaviour
                     answerTextField.text = "ERROU";
                 }
 
-                answerTextField.text += text + returnFood/*aiResponse.Result.ResolvedQuery*/;
+                answerTextField.text += " " + text + " "+ returnFood/*aiResponse.Result.ResolvedQuery*/;
                 
             } else
             {
