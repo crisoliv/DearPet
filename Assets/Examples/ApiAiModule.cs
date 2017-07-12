@@ -40,16 +40,21 @@ public class ApiAiModule : MonoBehaviour
     private AudioSource aud;
     public AudioClip listeningSound;
 
-    public Sprite apple;
-    public Sprite banana;
-    public Sprite bread;
-    public Sprite brocoli;
-    public Sprite carrot;
+    public Sprite appleSprite;
+    public Sprite bananaSprite;
+    public Sprite orangeSprite;
+    public Sprite broccoliSprite;
+    public Sprite carrotSprite;
+    public Sprite chocolateSprite;
+    public Sprite eggSprite;
+    public Sprite watermelonSprite;
+    public Sprite icecreamSprite;
+    public Sprite cakeSprite;
     public GameObject foodItem;
 
-    string returFood;
+    string returnFood;
     Image foodImage;
-    string[] foods = { "Apple", "Banana", "Bread", "Brocoli", "Carrot", "Chocolate", "Egg", "Watermelon", "Icecream", "Pear" };
+    string[] foods = { "apple", "banana", "orange", "broccoli", "carrot", "chocolate", "egg", "watermelon", "icecream", "cake" };
     int index = 0;
 
     private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -85,7 +90,7 @@ public class ApiAiModule : MonoBehaviour
         apiAiUnity.OnResult += HandleOnResult;
 
         foodImage = foodItem.GetComponent<Image>();
-        returFood = foods[index];
+        returnFood = foods[index];
     }
 
     void HandleOnResult(object sender, AIResponseEventArgs e)
@@ -97,26 +102,62 @@ public class ApiAiModule : MonoBehaviour
                 Debug.Log(aiResponse.Result.ResolvedQuery);
                 var outText = JsonConvert.SerializeObject(aiResponse, jsonSettings);
 
-                Debug.Log(outText);
+                Debug.Log(outText);                
 
-                //string food = LoadFood();
+                string text = aiResponse.Result.ResolvedQuery.ToLower();                
 
-                if (aiResponse.Result.ResolvedQuery == returFood)
+                if (/*aiResponse.Result.ResolvedQuery*/ text == returnFood)
                 {                    
                     if (index == 10)
                     {
                         index = 0;
                     }
                     index++;
-                    foodImage.sprite = Resources.Load<Sprite>(returFood);
-                    returFood = foods[index];
+                    //foodImage.sprite = Resources.Load<Sprite>("Resources/" + returnFood);
+
+                    switch (index)
+                    {
+                        case 0:
+                            foodImage.sprite = appleSprite;
+                            break;
+                        case 1:
+                            foodImage.sprite = bananaSprite;
+                            break;
+                        case 2:
+                            foodImage.sprite = orangeSprite;
+                            break;
+                        case 3:
+                            foodImage.sprite = broccoliSprite;
+                            break;
+                        case 4:
+                            foodImage.sprite = carrotSprite;
+                            break;
+                        case 5:
+                            foodImage.sprite = chocolateSprite;
+                            break;
+                        case 6:
+                            foodImage.sprite = eggSprite;
+                            break;
+                        case 7:
+                            foodImage.sprite = watermelonSprite;
+                            break;
+                        case 8:
+                            foodImage.sprite = icecreamSprite;
+                            break;
+                        case 9:
+                            foodImage.sprite = cakeSprite;
+                            break;                        
+                    }                    
+
+                    returnFood = foods[index];
+                    answerTextField.text = "ACERTOU";
                 }
                 else
                 {
-                    answerTextField.text = "FALSO";
+                    answerTextField.text = "ERROU";
                 }
 
-                answerTextField.text = aiResponse.Result.ResolvedQuery;
+                answerTextField.text += text + returnFood/*aiResponse.Result.ResolvedQuery*/;
                 
             } else
             {
@@ -125,38 +166,34 @@ public class ApiAiModule : MonoBehaviour
         });
     }
 
-    string LoadFood()
+    /*string LoadFood()
     {
-        /*if (index == 10)
-        {
-            index = 0;
-        }*/
 
         if (index == 10)
         {
             index = 0;
         }
 
-        returFood = foods[index];
+        returnFood = foods[index];
 
         foodImage = foodItem.GetComponent<Image>();
 
-        foodImage.sprite = Resources.Load<Sprite>(returFood);
+        foodImage.sprite = Resources.Load<Sprite>(returnFood);
 
-        /*if (returFood == "apple")
+        if (returnFood == "apple")
         {
             apple.SetActive(true);
             banana.SetActive(false);
         }
-        else if (returFood == "banana") {
+        else if (returnFood == "banana") {
             apple.SetActive(false);
             banana.SetActive(true);
-        }*/
+        }
 
 
         index++;
-        return returFood;
-    }
+        return returnFood;
+    }*/
 
     void HandleOnError(object sender, AIErrorEventArgs e)
     {
