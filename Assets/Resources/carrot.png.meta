@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 01ede228fe527d9498ceda2e9dc768e6
-timeCreated: 1499787953
+guid: f7e2edec125454d0da2203448dfc513b
+timeCreated: 1499870443
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -67,14 +67,6 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
