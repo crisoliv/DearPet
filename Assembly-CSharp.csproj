@@ -46,11 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ApiAiModule.cs" />
      <Compile Include="Assets\ApiAiSDK\AndroidRecognitionResult.cs" />
      <Compile Include="Assets\ApiAiSDK\AndroidRecognizer.cs" />
      <Compile Include="Assets\ApiAiSDK\ApiAiUnity.cs" />
      <Compile Include="Assets\ApiAiSDK\ResultWrapper.cs" />
+     <Compile Include="Assets\Examples\ApiAiModule.cs" />
      <Compile Include="Assets\Scripts\CreditsController.cs" />
      <Compile Include="Assets\Scripts\CustomizationControl.cs" />
      <Compile Include="Assets\Scripts\HomeController.cs" />
