@@ -40,6 +40,20 @@ public class ApiAiModule : MonoBehaviour
     private AudioSource aud;
     public AudioClip listeningSound;
 
+    public AudioClip appleAudio;
+    public AudioClip bananaAudio;
+    public AudioClip pizzaAudio;
+    public AudioClip broccoliAudio;
+    public AudioClip carrotAudio;
+    public AudioClip chocolateAudio;
+    public AudioClip eggAudio;
+    public AudioClip watermelonAudio;
+    public AudioClip icecreamAudio;    
+
+    public AudioSource audioSource;
+    public AudioSource audioSourceEAT;
+    public AudioSource audioSourceCorrect;
+
     public Sprite appleSprite;
     public Sprite bananaSprite;
     public Sprite pizzaSprite;
@@ -55,6 +69,7 @@ public class ApiAiModule : MonoBehaviour
     public Slider staminaBar;
     //Slider sliderStamina;
 
+    float timer;
     int word;
     int verb;
     string returnFood;
@@ -98,7 +113,14 @@ public class ApiAiModule : MonoBehaviour
         returnFood = foods[index];
 
         answerTextField.color = Color.clear;
-        //sliderStamina = staminaBar.GetComponent<Slider>();
+        //sliderStamina = staminaBar.GetComponent<Slider>();   
+        timer = 0;
+    }
+
+    IEnumerator PlayAudioPart2()
+    {        
+        yield return new WaitForSeconds(1.5f);
+        audioSource.Play();
     }
 
     void HandleOnResult(object sender, AIResponseEventArgs e)
@@ -141,63 +163,78 @@ public class ApiAiModule : MonoBehaviour
                             foodImage.sprite = appleSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = appleAudio;
                             break;
                         case 1:
                             foodImage.sprite = bananaSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = bananaAudio;
                             break;
                         case 2:
                             foodImage.sprite = pizzaSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = pizzaAudio;
                             break;
                         case 3:
                             foodImage.sprite = broccoliSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = broccoliAudio;
                             break;
                         case 4:
                             foodImage.sprite = carrotSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = carrotAudio;
                             break;
                         case 5:
                             foodImage.sprite = chocolateSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = chocolateAudio;
                             break;
                         case 6:
                             foodImage.sprite = eggSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = eggAudio;
                             break;
                         case 7:
                             foodImage.sprite = watermelonSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = watermelonAudio;
                             break;
                         case 8:
                             foodImage.sprite = icecreamSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
+                            audioSource.clip = icecreamAudio;
                             break;
                         case 9:
                             foodImage.sprite = cakeSprite;
                             foodItem.SetActive(true);
                             answerTextField.color = Color.clear;
                             break;                        
-                    }                 
+                    }
 
+                    audioSourceCorrect.Play();
                     returnFood = foods[index];
                     answerTextField.text = returnFood;
                     //answerTextField.text = "ACERTOU";
                     staminaBar.value += 0.25f;
                 }
                 else
-                {
+                {                    
                     answerTextField.color = Color.black;
                     foodItem.SetActive(false);
+                    audioSourceEAT.Play();
+                    timer = 0;
+
+                    StartCoroutine(PlayAudioPart2());
+                    //audioSource.Play();                                        
                     //answerTextField.text = "ERROU";
                 }
 
@@ -223,6 +260,8 @@ public class ApiAiModule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+
         if (apiAiUnity != null)
         {
             apiAiUnity.Update();

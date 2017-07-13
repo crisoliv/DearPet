@@ -10,7 +10,9 @@ public class Splash : MonoBehaviour {
 
     private void Awake()
     {
-        Screen.fullScreen = false;
+        Screen.fullScreen = true;
+        PlayerPrefs.SetInt("PlayerWords", 0);
+        PlayerPrefs.SetInt("PlayerVerbs", 0);
     }
 
     IEnumerator Load()

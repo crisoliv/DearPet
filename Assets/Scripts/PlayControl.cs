@@ -14,6 +14,7 @@ public class PlayControl : MonoBehaviour {
     public GameObject titleDearPet;
     public GameObject titleCustom;
 
+    public GameObject btTalk;
     public GameObject btItemCustom;
     public GameObject btNextItemCustom;
     public GameObject btPrevItemCustom;
@@ -36,6 +37,7 @@ public class PlayControl : MonoBehaviour {
     public Color colorBlue;
 
 
+
     // Use this for initialization
     void Start()
     {
@@ -52,6 +54,7 @@ public class PlayControl : MonoBehaviour {
             titleDearPet.SetActive(false);
             titleCustom.SetActive(true);
 
+            btTalk.SetActive(false);
             btItemCustom.SetActive(true);
             btNextItemCustom.SetActive(true);
             btPrevItemCustom.SetActive(true);
@@ -73,6 +76,7 @@ public class PlayControl : MonoBehaviour {
             titleDearPet.SetActive(true);
             titleCustom.SetActive(false);
 
+            btTalk.SetActive(true);
             btItemCustom.SetActive(false);
             btNextItemCustom.SetActive(false);
             btPrevItemCustom.SetActive(false);
