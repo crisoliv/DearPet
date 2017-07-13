@@ -51,11 +51,12 @@ public class ApiAiModule : MonoBehaviour
     public Sprite icecreamSprite;
     public Sprite cakeSprite;
     public GameObject foodItem;
-
     
     public Slider staminaBar;
     //Slider sliderStamina;
 
+    int word;
+    int verb;
     string returnFood;
     Image foodImage;
     string[] foods = { "apple", "banana", "pizza", "broccoli", "carrot", "chocolat", "egg", "watermelon", "ice cream", "cake" };
@@ -96,6 +97,7 @@ public class ApiAiModule : MonoBehaviour
         foodImage = foodItem.GetComponent<Image>();
         returnFood = foods[index];
 
+        answerTextField.color = Color.clear;
         //sliderStamina = staminaBar.GetComponent<Slider>();
     }
 
@@ -110,9 +112,21 @@ public class ApiAiModule : MonoBehaviour
 
                 Debug.Log(outText);                
 
-                string text = aiResponse.Result.ResolvedQuery.ToLower();                
+                string text = aiResponse.Result.ResolvedQuery.ToLower();     
+                
+                if (text.Contains(returnFood))
+                {
+                    word++;
+                    PlayerPrefs.SetInt("PlayerWords", word);
+                }
+                
+                if (text.Contains("eat"))
+                {
+                    verb++;
+                    PlayerPrefs.SetInt("PlayerVerbs", verb);
+                }
 
-                if (/*aiResponse.Result.ResolvedQuery*/ text == returnFood)
+                if (text.Contains(returnFood) && text.Contains("eat"))
                 {                    
                     if (index == 10)
                     {
@@ -125,46 +139,69 @@ public class ApiAiModule : MonoBehaviour
                     {
                         case 0:
                             foodImage.sprite = appleSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 1:
                             foodImage.sprite = bananaSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 2:
                             foodImage.sprite = pizzaSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 3:
                             foodImage.sprite = broccoliSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 4:
                             foodImage.sprite = carrotSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 5:
                             foodImage.sprite = chocolateSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 6:
                             foodImage.sprite = eggSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 7:
                             foodImage.sprite = watermelonSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 8:
                             foodImage.sprite = icecreamSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;
                         case 9:
                             foodImage.sprite = cakeSprite;
+                            foodItem.SetActive(true);
+                            answerTextField.color = Color.clear;
                             break;                        
                     }                 
 
                     returnFood = foods[index];
-                    answerTextField.text = "ACERTOU";
-                    staminaBar.value += 0.1f;
+                    answerTextField.text = returnFood;
+                    //answerTextField.text = "ACERTOU";
+                    staminaBar.value += 0.25f;
                 }
                 else
                 {
-                    answerTextField.text = "ERROU";
+                    answerTextField.color = Color.black;
+                    foodItem.SetActive(false);
+                    //answerTextField.text = "ERROU";
                 }
 
-                answerTextField.text += " " + text + " "+ returnFood/*aiResponse.Result.ResolvedQuery*/;
+                //answerTextField.text += " " + text + " "+ returnFood/*aiResponse.Result.ResolvedQuery*/;
                 
             } else
             {

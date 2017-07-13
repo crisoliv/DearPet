@@ -10,8 +10,8 @@ public class PizzaGraph : MonoBehaviour {
     public GameObject ListeningUI, ReadingUI;
 	void Start () {
         ///TODO: EDITAR AS VARIAVEIS AQUI
-        values[0] = 2;
-        values[1] = 1;
+        values[0] = PlayerPrefs.GetInt("PlayerWords");/*2;*/
+        values[1] = PlayerPrefs.GetInt("PlayerVerbs");/*1;*/
 
         StartCoroutine(MakeGraph());	
 	}

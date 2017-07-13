@@ -6,7 +6,7 @@ public class HomeController : MonoBehaviour {
 
     void Start()
     {
-        Screen.fullScreen = false;
+        Screen.fullScreen = true;
     }
     public void BtCredits()
     {
@@ -16,6 +16,11 @@ public class HomeController : MonoBehaviour {
     public void BtPlay()
     {
         SceneManager.LoadScene("Play");
+
+    }
+    public void BtStats()
+    {
+        SceneManager.LoadScene("Statistics");
 
     }
     private void LateUpdate()
