@@ -58,7 +58,7 @@ public class ApiAiModule : MonoBehaviour
 
     string returnFood;
     Image foodImage;
-    string[] foods = { "apple", "banana", "pizza", "broccoli", "carrot", "chocolat", "egg", "watermelon", "icecream", "cake" };
+    string[] foods = { "apple", "banana", "pizza", "broccoli", "carrot", "chocolat", "egg", "watermelon", "ice cream", "cake" };
     int index = 0;
 
     private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -157,6 +157,7 @@ public class ApiAiModule : MonoBehaviour
 
                     returnFood = foods[index];
                     answerTextField.text = "ACERTOU";
+                    staminaBar.value += 0.1f;
                 }
                 else
                 {
@@ -195,12 +196,9 @@ public class ApiAiModule : MonoBehaviour
         {
             ExecuteOnMainThread.Dequeue().Invoke();
         }
-
-        //while (true)
-        //{
-            //sliderStamina.value -= 0.1f;
-            staminaBar.value -= 0.1f * Time.deltaTime;
-        //}
+        
+        staminaBar.value -= 0.01f * Time.deltaTime;
+        
     }
        private void RunInMainThread(Action action)
     {
