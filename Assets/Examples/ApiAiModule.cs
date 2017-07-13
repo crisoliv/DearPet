@@ -42,7 +42,7 @@ public class ApiAiModule : MonoBehaviour
 
     public Sprite appleSprite;
     public Sprite bananaSprite;
-    public Sprite orangeSprite;
+    public Sprite pizzaSprite;
     public Sprite broccoliSprite;
     public Sprite carrotSprite;
     public Sprite chocolateSprite;
@@ -52,9 +52,13 @@ public class ApiAiModule : MonoBehaviour
     public Sprite cakeSprite;
     public GameObject foodItem;
 
+    
+    public Slider staminaBar;
+    //Slider sliderStamina;
+
     string returnFood;
     Image foodImage;
-    string[] foods = { "apple", "banana", "pizza", "broccoli", "carrot", "chocolate", "egg", "watermelon", "icecream", "cake" };
+    string[] foods = { "apple", "banana", "pizza", "broccoli", "carrot", "chocolat", "egg", "watermelon", "ice cream", "cake" };
     int index = 0;
 
     private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -91,6 +95,8 @@ public class ApiAiModule : MonoBehaviour
 
         foodImage = foodItem.GetComponent<Image>();
         returnFood = foods[index];
+
+        //sliderStamina = staminaBar.GetComponent<Slider>();
     }
 
     void HandleOnResult(object sender, AIResponseEventArgs e)
@@ -124,7 +130,7 @@ public class ApiAiModule : MonoBehaviour
                             foodImage.sprite = bananaSprite;
                             break;
                         case 2:
-                            foodImage.sprite = orangeSprite;
+                            foodImage.sprite = pizzaSprite;
                             break;
                         case 3:
                             foodImage.sprite = broccoliSprite;
@@ -151,6 +157,7 @@ public class ApiAiModule : MonoBehaviour
 
                     returnFood = foods[index];
                     answerTextField.text = "ACERTOU";
+                    staminaBar.value += 0.1f;
                 }
                 else
                 {
@@ -166,34 +173,6 @@ public class ApiAiModule : MonoBehaviour
         });
     }
 
-    /*string LoadFood()
-    {
-
-        if (index == 10)
-        {
-            index = 0;
-        }
-
-        returnFood = foods[index];
-
-        foodImage = foodItem.GetComponent<Image>();
-
-        foodImage.sprite = Resources.Load<Sprite>(returnFood);
-
-        if (returnFood == "apple")
-        {
-            apple.SetActive(true);
-            banana.SetActive(false);
-        }
-        else if (returnFood == "banana") {
-            apple.SetActive(false);
-            banana.SetActive(true);
-        }
-
-
-        index++;
-        return returnFood;
-    }*/
 
     void HandleOnError(object sender, AIErrorEventArgs e)
     {
@@ -217,9 +196,11 @@ public class ApiAiModule : MonoBehaviour
         {
             ExecuteOnMainThread.Dequeue().Invoke();
         }
+        
+        staminaBar.value -= 0.01f * Time.deltaTime;
+        
     }
-
-    private void RunInMainThread(Action action)
+       private void RunInMainThread(Action action)
     {
         ExecuteOnMainThread.Enqueue(action);
     }
