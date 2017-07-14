@@ -6,7 +6,12 @@ public class HomeController : MonoBehaviour {
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("FirstApple")) PlayerPrefs.DeleteKey("FirstApple");
+        if (PlayerPrefs.HasKey("FirstApple"))
+        {
+            PlayerPrefs.DeleteKey("FirstApple");
+            PlayerPrefs.Save();
+        }
+
 
         Screen.fullScreen = true;
     }
