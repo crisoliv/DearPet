@@ -357,8 +357,8 @@ public class ApiAiModule : MonoBehaviour
      
         if (!PlayerPrefs.HasKey("FirstApple"))
         {
-            //audioSourceEAT.Play();
-            //yield return new WaitForSeconds(0.4F);
+            audioSourceEAT.Play();
+            yield return new WaitForSeconds(0.4F);
             audioSource.Play();
             yield return new WaitForSeconds(1.5F);
             PlayerPrefs.SetInt("FirstApple", 1);

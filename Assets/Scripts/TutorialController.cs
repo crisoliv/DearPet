@@ -51,12 +51,12 @@ public class TutorialController : MonoBehaviour {
         }
         else if (order == 2)
         {
-            textA = "In this green bar below, you can see my stamina...";
+            textA = "In the green bar below, you can see my stamina...";
         }
         else if (order == 3)
         {
 
-            textA = "When it starts to decrease too much you should feed me!";
+            textA = "When it starts to decrease too much, you should feed me!";
 
         }
         else if (order == 4)
