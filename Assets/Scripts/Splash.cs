@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Splash : MonoBehaviour {
 
-  
+    
     AsyncOperation async;
 
     private void Awake()
@@ -13,6 +13,7 @@ public class Splash : MonoBehaviour {
         Screen.fullScreen = true;
         PlayerPrefs.SetInt("PlayerWords", 0);
         PlayerPrefs.SetInt("PlayerVerbs", 0);
+       
     }
 
     IEnumerator Load()

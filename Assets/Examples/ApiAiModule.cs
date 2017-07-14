@@ -231,6 +231,8 @@ public class ApiAiModule : MonoBehaviour
                     answerTextField.color = Color.black;
                     foodItem.SetActive(false);
                     audioSourceEAT.Play();
+                    audioSourceEAT.Play();
+                    audioSourceEAT.Play();
                     timer = 0;
 
                     StartCoroutine(PlayAudioPart2());
