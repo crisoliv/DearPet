@@ -115,6 +115,9 @@ public class ApiAiModule : MonoBehaviour
         answerTextField.color = Color.clear;
         //sliderStamina = staminaBar.GetComponent<Slider>();   
         timer = 0;
+
+        // audioSource.Play();
+
     }
 
     IEnumerator PlayAudioPart2()
@@ -231,6 +234,7 @@ public class ApiAiModule : MonoBehaviour
                     answerTextField.color = Color.black;
                     foodItem.SetActive(false);
                     audioSourceEAT.Play();
+                 
                     timer = 0;
 
                     StartCoroutine(PlayAudioPart2());
@@ -343,12 +347,37 @@ public class ApiAiModule : MonoBehaviour
 
     public void StartNativeRecognition()
     {
+        StartCoroutine(RunApi());
+      
+     
+    }
+
+    IEnumerator RunApi()
+    {
+     
+        if (!PlayerPrefs.HasKey("FirstApple"))
+        {
+            //audioSourceEAT.Play();
+            //yield return new WaitForSeconds(0.4F);
+            audioSource.Play();
+            yield return new WaitForSeconds(1.5F);
+            PlayerPrefs.SetInt("FirstApple", 1);
+            PlayerPrefs.Save();
+        }
+       
+       
+
+
         try
         {
+
             apiAiUnity.StartNativeRecognition();
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             Debug.LogException(ex);
         }
+        yield return null;
     }
+
 }

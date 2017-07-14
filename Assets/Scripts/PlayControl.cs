@@ -137,7 +137,7 @@ public class PlayControl : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("Home");
         }
     }
 }

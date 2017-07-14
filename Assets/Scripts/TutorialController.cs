@@ -9,9 +9,9 @@ public class TutorialController : MonoBehaviour {
     int order = 0;
     public GameObject apiBtn;
 	void Start () {
-
-        PlayerPrefs.DeleteKey("FirstTime");
-        PlayerPrefs.Save();
+        ///USE IT FOR DEBUG 
+        //PlayerPrefs.DeleteKey("FirstTime");
+        //PlayerPrefs.Save();
 
 
 

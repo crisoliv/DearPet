@@ -17,11 +17,12 @@ public class CustomizationControl : MonoBehaviour {
 
     }
 
+
     private void LateUpdate()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    Application.Quit();
-        //}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Home");
+        }
     }
 }

@@ -6,6 +6,7 @@ public class HomeController : MonoBehaviour {
 
     void Start()
     {
+        PlayerPrefs.DeleteKey("FirstApple");
         Screen.fullScreen = true;
     }
     public void BtCredits()
