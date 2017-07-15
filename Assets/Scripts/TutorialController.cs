@@ -12,7 +12,7 @@ public class TutorialController : MonoBehaviour {
         ///USE IT FOR DEBUG 
         //PlayerPrefs.DeleteKey("FirstTime");
         //PlayerPrefs.Save();
-
+        ///
 
 
         if (PlayerPrefs.HasKey("FirstTime"))    //Not the first time.
@@ -52,6 +52,7 @@ public class TutorialController : MonoBehaviour {
         else if (order == 2)
         {
             textA = "In the green bar below, you can see my stamina...";
+            GameObject.Find("StaminaFeedback").GetComponent<ParticleSystem>().Emit(50);
         }
         else if (order == 3)
         {

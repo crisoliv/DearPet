@@ -154,96 +154,8 @@ public class ApiAiModule : MonoBehaviour
                     PlayerPrefs.SetInt("PlayerVerbs", verb);
                 }
 
-                if (text.Contains(returnFood) && text.Contains("eat"))
-                {                    
-                    if (index == 10)
-                    {
-                        index = 0;
-                    }
-                    index++;
-                    //foodImage.sprite = Resources.Load<Sprite>("Resources/" + returnFood);
-
-                    switch (index)
-                    {
-                        case 0:
-                            foodImage.sprite = appleSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = appleAudio;
-                            break;
-                        case 1:
-                            foodImage.sprite = bananaSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = bananaAudio;
-                            break;
-                        case 2:
-                            foodImage.sprite = pizzaSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = pizzaAudio;
-                            break;
-                        case 3:
-                            foodImage.sprite = broccoliSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = broccoliAudio;
-                            break;
-                        case 4:
-                            foodImage.sprite = carrotSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = carrotAudio;
-                            break;
-                        case 5:
-                            foodImage.sprite = chocolateSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = chocolateAudio;
-                            break;
-                        case 6:
-                            foodImage.sprite = eggSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = eggAudio;
-                            break;
-                        case 7:
-                            foodImage.sprite = watermelonSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = watermelonAudio;
-                            break;
-                        case 8:
-                            foodImage.sprite = icecreamSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            audioSource.clip = icecreamAudio;
-                            break;
-                        case 9:
-                            foodImage.sprite = cakeSprite;
-                            foodItem.SetActive(true);
-                            answerTextField.color = Color.clear;
-                            break;                        
-                    }
-
-                    audioSourceCorrect.Play();
-                    returnFood = foods[index];
-                    answerTextField.text = returnFood;
-                    //answerTextField.text = "ACERTOU";
-                    staminaBar.value += 0.25f;
-                }
-                else
-                {                    
-                    answerTextField.color = Color.black;
-                    foodItem.SetActive(false);
-                    audioSourceEAT.Play();
-                 
-                    timer = 0;
-
-                    StartCoroutine(PlayAudioPart2());
-                    //audioSource.Play();                                        
-                    //answerTextField.text = "ERROU";
-                }
+                StartCoroutine(CorrectAnswer(text));
+                
 
                 //answerTextField.text += " " + text + " "+ returnFood/*aiResponse.Result.ResolvedQuery*/;
                 
@@ -254,6 +166,130 @@ public class ApiAiModule : MonoBehaviour
         });
     }
 
+    IEnumerator CorrectAnswer(string text)  // Called when user giver a correct answer.
+    {
+        if (text.Contains(returnFood) && text.Contains("eat"))
+        {
+            audioSourceCorrect.Play();
+
+            yield return new WaitForSeconds(10);
+
+            ///Character jump.
+
+
+            //char
+
+
+
+
+
+
+
+
+            ///
+
+            if (index == 10)
+            {
+                index = 0;
+            }
+            index++;
+            //foodImage.sprite = Resources.Load<Sprite>("Resources/" + returnFood);
+
+            switch (index)
+            {
+                case 0:
+                    foodImage.sprite = appleSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = appleAudio;
+                    break;
+                case 1:
+                    foodImage.sprite = bananaSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = bananaAudio;
+                    break;
+                case 2:
+                    foodImage.sprite = pizzaSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = pizzaAudio;
+                    break;
+                case 3:
+                    foodImage.sprite = broccoliSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = broccoliAudio;
+                    break;
+                case 4:
+                    foodImage.sprite = carrotSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = carrotAudio;
+                    break;
+                case 5:
+                    foodImage.sprite = chocolateSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = chocolateAudio;
+                    break;
+                case 6:
+                    foodImage.sprite = eggSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = eggAudio;
+                    break;
+                case 7:
+                    foodImage.sprite = watermelonSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = watermelonAudio;
+                    break;
+                case 8:
+                    foodImage.sprite = icecreamSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = icecreamAudio;
+                    break;
+                case 9:
+                    foodImage.sprite = cakeSprite;
+                    foodItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    break;
+            }
+
+
+            returnFood = foods[index];
+            answerTextField.text = returnFood;
+            //answerTextField.text = "ACERTOU";
+            StartCoroutine(StaminaFeedbackUI());
+            staminaBar.value += 0.25f;
+        }
+        else
+        {
+            answerTextField.color = Color.black;
+            foodItem.SetActive(false);
+            audioSourceEAT.Play();
+
+            timer = 0;
+
+            StartCoroutine(PlayAudioPart2());
+            //audioSource.Play();                                        
+            //answerTextField.text = "ERROU";
+        }
+        yield return null;
+    }
+
+    IEnumerator StaminaFeedbackUI()
+    {
+        GameObject.Find("StaminaFeedback").GetComponent<ParticleSystem>().Emit(50);
+       // yield return new WaitForSeconds(2);
+
+
+
+        yield return null;
+
+    }
 
     void HandleOnError(object sender, AIErrorEventArgs e)
     {
@@ -267,6 +303,19 @@ public class ApiAiModule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ///DEBUG  STAMINA FEEDBACK
+
+        if (Input.GetKeyDown("s"))
+        {
+            StartCoroutine(StaminaFeedbackUI());
+        }
+        
+        
+        ///
+
+
+
+
         timer += Time.deltaTime;
 
         if (apiAiUnity != null)
@@ -390,11 +439,11 @@ public class ApiAiModule : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator StartWaveUI()
+    IEnumerator StartWaveUI()   //Starts Wave Listening Animation.
     {
         yield return new WaitForSeconds(.5F);
         WaveListenUI.SetActive(true);
-        yield return new WaitForSeconds(5F);
+        yield return new WaitForSeconds(6F);
         WaveListenUI.SetActive(false);
     }
 }
