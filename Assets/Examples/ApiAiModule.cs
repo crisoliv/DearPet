@@ -68,6 +68,8 @@ public class ApiAiModule : MonoBehaviour
     
     public Slider staminaBar;
     //Slider sliderStamina;
+    public GameObject WaveListenUI;
+
 
     float timer;
     int word;
@@ -128,6 +130,7 @@ public class ApiAiModule : MonoBehaviour
 
     void HandleOnResult(object sender, AIResponseEventArgs e)
     {
+        WaveListenUI.SetActive(false);
         RunInMainThread(() => {
             var aiResponse = e.Response;
             if (aiResponse != null)
@@ -137,8 +140,8 @@ public class ApiAiModule : MonoBehaviour
 
                 Debug.Log(outText);                
 
-                string text = aiResponse.Result.ResolvedQuery.ToLower();     
-                
+                string text = aiResponse.Result.ResolvedQuery.ToLower();
+               
                 if (text.Contains(returnFood))
                 {
                     word++;
@@ -300,12 +303,16 @@ public class ApiAiModule : MonoBehaviour
         }
             
         aud = GetComponent<AudioSource>();
+
+        //WaveListenUI.SetActive(true);
         apiAiUnity.StartListening(aud);
+        
 
     }
     
     public void StopListening()
     {
+      
         try
         {
             Debug.Log("StopListening");
@@ -315,6 +322,7 @@ public class ApiAiModule : MonoBehaviour
                 answerTextField.text = "";
             }
             
+          
             apiAiUnity.StopListening();
         } catch (Exception ex)
         {
@@ -371,7 +379,9 @@ public class ApiAiModule : MonoBehaviour
         try
         {
 
+            StartCoroutine(StartWaveUI());
             apiAiUnity.StartNativeRecognition();
+            
         }
         catch (Exception ex)
         {
@@ -380,4 +390,11 @@ public class ApiAiModule : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator StartWaveUI()
+    {
+        yield return new WaitForSeconds(.5F);
+        WaveListenUI.SetActive(true);
+        yield return new WaitForSeconds(5F);
+        WaveListenUI.SetActive(false);
+    }
 }
