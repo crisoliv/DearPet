@@ -72,7 +72,6 @@ public class ApiAiModule : MonoBehaviour
     //Slider sliderStamina;
     public GameObject WaveListenUI;
 
-    Coroutine characterAnim;
     float timer;
     int word;
     int verb;
@@ -178,8 +177,9 @@ public class ApiAiModule : MonoBehaviour
 
             ///Character jump animation.
 
-            characterAnim = StartCoroutine(StartHappyAnim());
+            StartCoroutine(StartHappyAnim());
 
+            StartCoroutine(StaminaFeedbackUI());
 
 
 
@@ -265,7 +265,6 @@ public class ApiAiModule : MonoBehaviour
             returnFood = foods[index];
             answerTextField.text = returnFood;
             //answerTextField.text = "ACERTOU";
-            StartCoroutine(StaminaFeedbackUI());
             staminaBar.value += 0.25f;
         }
         else
@@ -285,7 +284,8 @@ public class ApiAiModule : MonoBehaviour
 
     IEnumerator StaminaFeedbackUI()
     {
-        GameObject.Find("StaminaFeedbackPS").GetComponent<ParticleSystem>().Emit(50);
+        yield return new WaitForSeconds(1F);
+        GameObject.Find("StaminaFeedbackPS").GetComponent<ParticleSystem>().Emit(100);
        // yield return new WaitForSeconds(2);
 
 
@@ -308,15 +308,15 @@ public class ApiAiModule : MonoBehaviour
     {
         ///DEBUG  STAMINA FEEDBACK
 
-        //if (Input.GetKeyDown("s"))
-        //{
+        // if (Input.GetKeyDown("s"))
+        // {
         //    StartCoroutine(StaminaFeedbackUI());
-        //}
-        ///// DEBUG CHARACTER ANIM
-        //if (Input.GetKeyDown("c"))
-        //{
+        // }
+        // /// DEBUG CHARACTER ANIM
+        // if (Input.GetKeyDown("c"))
+        // {
         //    StartCoroutine(StartHappyAnim());
-        //}
+        // }
 
 
 
