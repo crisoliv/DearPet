@@ -49,6 +49,14 @@ public class PlayControl : MonoBehaviour {
     public void BtCustomization()
     {
         /*SceneManager.LoadScene("Customization");*/
+
+        if (GameObject.Find("HappyWinPS"))
+        {
+            GameObject.Find("HappyWinPS").SetActive(false);
+        }
+        GameObject.Find("Pet").GetComponent<Animator>().SetBool("jump",false);
+
+
         if (whichItem)
         {
             titleDearPet.SetActive(false);

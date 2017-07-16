@@ -54,6 +54,7 @@ public class ApiAiModule : MonoBehaviour
     public AudioSource audioSourceEAT;
     public AudioSource audioSourceCorrect;
 
+    
     public Sprite appleSprite;
     public Sprite bananaSprite;
     public Sprite pizzaSprite;
@@ -65,12 +66,13 @@ public class ApiAiModule : MonoBehaviour
     public Sprite icecreamSprite;
     public Sprite cakeSprite;
     public GameObject foodItem;
-    
+
+    public GameObject happyWinPS;
     public Slider staminaBar;
     //Slider sliderStamina;
     public GameObject WaveListenUI;
 
-
+    Coroutine characterAnim;
     float timer;
     int word;
     int verb;
@@ -166,18 +168,19 @@ public class ApiAiModule : MonoBehaviour
         });
     }
 
-    IEnumerator CorrectAnswer(string text)  // Called when user giver a correct answer.
+    IEnumerator CorrectAnswer(string text)  // Called when user gives a correct answer.
     {
         if (text.Contains(returnFood) && text.Contains("eat"))
         {
             audioSourceCorrect.Play();
 
-            yield return new WaitForSeconds(10);
+            //yield return new WaitForSeconds(10);
 
-            ///Character jump.
+            ///Character jump animation.
+
+            characterAnim = StartCoroutine(StartHappyAnim());
 
 
-            //char
 
 
 
@@ -282,7 +285,7 @@ public class ApiAiModule : MonoBehaviour
 
     IEnumerator StaminaFeedbackUI()
     {
-        GameObject.Find("StaminaFeedback").GetComponent<ParticleSystem>().Emit(50);
+        GameObject.Find("StaminaFeedbackPS").GetComponent<ParticleSystem>().Emit(50);
        // yield return new WaitForSeconds(2);
 
 
@@ -305,12 +308,19 @@ public class ApiAiModule : MonoBehaviour
     {
         ///DEBUG  STAMINA FEEDBACK
 
-        if (Input.GetKeyDown("s"))
-        {
-            StartCoroutine(StaminaFeedbackUI());
-        }
-        
-        
+        //if (Input.GetKeyDown("s"))
+        //{
+        //    StartCoroutine(StaminaFeedbackUI());
+        //}
+        ///// DEBUG CHARACTER ANIM
+        //if (Input.GetKeyDown("c"))
+        //{
+        //    StartCoroutine(StartHappyAnim());
+        //}
+
+
+
+
         ///
 
 
@@ -332,7 +342,35 @@ public class ApiAiModule : MonoBehaviour
         staminaBar.value -= 0.01f * Time.deltaTime;
         
     }
-       private void RunInMainThread(Action action)
+
+    IEnumerator StartHappyAnim()
+    {
+        GameObject character = GameObject.Find("Pet");
+        character.GetComponent<Animator>().SetBool("jump", true);
+
+        int contTime=0;
+
+        happyWinPS.SetActive(true);
+
+        while (true)
+        {
+
+            contTime++;
+            character.transform.position = new Vector2(0, - Mathf.PingPong(Time.time*3, .8F) /**Time.deltaTime */);
+            yield return new WaitForSeconds(.02F);
+            if (contTime > 100) break;
+        }
+        character.GetComponent<Animator>().SetBool("jump",false);
+
+        happyWinPS.SetActive(false);
+
+        yield return null;
+
+
+    }
+
+
+    private void RunInMainThread(Action action)
     {
         ExecuteOnMainThread.Enqueue(action);
     }
@@ -355,13 +393,10 @@ public class ApiAiModule : MonoBehaviour
 
         //WaveListenUI.SetActive(true);
         apiAiUnity.StartListening(aud);
-        
-
     }
     
     public void StopListening()
     {
-      
         try
         {
             Debug.Log("StopListening");
@@ -371,7 +406,6 @@ public class ApiAiModule : MonoBehaviour
                 answerTextField.text = "";
             }
             
-          
             apiAiUnity.StopListening();
         } catch (Exception ex)
         {

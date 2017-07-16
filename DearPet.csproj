@@ -110,6 +110,7 @@
     <Compile Include="Assets\Scripts\PlayControl.cs" />
     <Compile Include="Assets\Scripts\Splash.cs" />
     <Compile Include="Assets\Scripts\TutorialController.cs" />
+    <Compile Include="Assets\Stick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
