@@ -9,11 +9,6 @@ public class TutorialController : MonoBehaviour {
     int order = 0;
     public GameObject apiBtn;
 	void Start () {
-        ///USE IT FOR DEBUG 
-        //PlayerPrefs.DeleteKey("FirstTime");
-        //PlayerPrefs.Save();
-        ///
-
 
         /*if (PlayerPrefs.HasKey("FirstTime"))    //Not the first time.
         {
@@ -53,18 +48,18 @@ public class TutorialController : MonoBehaviour {
         }
         else if (order == 3)
         {
-            textA = "Can you see the GREEN BAR below me? That's my STAMINA! - Você pode ver o GREEN BAR abaixo de mim? Esse é o meu STAMINA!";            
+            textA = "Can you see the GREEN BAR below me? That's my STAMINA! - A BARRA VERDE abaixo é a minha STAMINA!";            
         }
         else if (order == 4)
         {
 
-            textA = "When it starts to decrease too much, you should feed me! - Quando começa a diminuir demais, você deve me alimentar";
+            textA = "When it starts to decrease too much, you should feed me! - Quando diminuir demais, me alimente!";
 
         }
         else if (order == 5)
         {
 
-            textA = "To feed me, touch the food on top of my head and say the right pronunciation! - Para me alimentar, toque a comida no topo da minha cabeça e diga a pronúncia certa!";
+            textA = "To feed me, touch the food above and pronounce correctly! - Para me alimentar, toque na comida acima e pronuncie corretamente!";
 
         }
         else
