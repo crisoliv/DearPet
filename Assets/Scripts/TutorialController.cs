@@ -15,17 +15,17 @@ public class TutorialController : MonoBehaviour {
         ///
 
 
-        if (PlayerPrefs.HasKey("FirstTime"))    //Not the first time.
+        /*if (PlayerPrefs.HasKey("FirstTime"))    //Not the first time.
         {
             StartGame();
         }
         else // First time.
-        {
+        {*/
             textBox.transform.parent.gameObject.SetActive(true);
             PlayerPrefs.SetInt("FirstTime",1);
             PlayerPrefs.Save();
             RunTutorial();
-        }
+        //}
     }
 
 
@@ -45,25 +45,26 @@ public class TutorialController : MonoBehaviour {
         string textA = "";
         if (order == 1)
         {
-            textA = "Hi buddy, you can use this screen to feed me!";
-
-
+            textA = "Hi, my name is Boo. Nice to meet you! - Oi, meu nome é Boo. Prazer em conhecê-lo!";
         }
         else if (order == 2)
         {
-            textA = "In the FIRST and GREEN BAR below, you can see my stamina...";
-            //GameObject.Find("StaminaFeedback").GetComponent<ParticleSystem>().Emit(50);
+            textA = "You can use this screen to feed me! - Você pode usar esta tela para me alimentar!";
         }
         else if (order == 3)
         {
-
-            textA = "When it starts to decrease too much, you should feed me!";
-
+            textA = "Can you see the GREEN BAR below me? That's my STAMINA! - Você pode ver o GREEN BAR abaixo de mim? Esse é o meu STAMINA!";            
         }
         else if (order == 4)
         {
 
-            textA = "To feed me, touch the food on top of my head and say the right pronunciation!";
+            textA = "When it starts to decrease too much, you should feed me! - Quando começa a diminuir demais, você deve me alimentar";
+
+        }
+        else if (order == 5)
+        {
+
+            textA = "To feed me, touch the food on top of my head and say the right pronunciation! - Para me alimentar, toque a comida no topo da minha cabeça e diga a pronúncia certa!";
 
         }
         else
@@ -73,13 +74,5 @@ public class TutorialController : MonoBehaviour {
         }
 
         textBox.text = textA;
-
-
-     
-
-
-
-
-
     }
 }
