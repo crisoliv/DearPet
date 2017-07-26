@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayControl : MonoBehaviour {
 
-    bool whichItem = true;
+    bool switchItem = true;
     bool customUsing = true;
     int nextItemCustom = 0;
     public Camera camera;
@@ -57,7 +57,7 @@ public class PlayControl : MonoBehaviour {
         GameObject.Find("Pet").GetComponent<Animator>().SetBool("jump",false);
 
 
-        if (whichItem)
+        if (switchItem)
         {
             titleDearPet.SetActive(false);
             titleCustom.SetActive(true);
@@ -75,11 +75,11 @@ public class PlayControl : MonoBehaviour {
             itemPlayBack.SetActive(false);
             txtBack.SetActive(true);
 
-            bar.SetActive(false);
+            //bar.SetActive(false);
 
             camera.backgroundColor = colorWhite;
 
-            whichItem = false;
+            switchItem = false;
         } else {
             titleDearPet.SetActive(true);
             titleCustom.SetActive(false);
@@ -98,11 +98,11 @@ public class PlayControl : MonoBehaviour {
             itemCustomBack.SetActive(false);
             txtBack.SetActive(false);
 
-            bar.SetActive(true);
+            //bar.SetActive(true);
 
             camera.backgroundColor = colorBlue;
 
-            whichItem = true;
+            switchItem = true;
         }
     }
 

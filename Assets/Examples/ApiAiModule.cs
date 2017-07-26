@@ -306,26 +306,6 @@ public class ApiAiModule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ///DEBUG  STAMINA FEEDBACK
-
-        // if (Input.GetKeyDown("s"))
-        // {
-        //    StartCoroutine(StaminaFeedbackUI());
-        // }
-        // /// DEBUG CHARACTER ANIM
-        // if (Input.GetKeyDown("c"))
-        // {
-        //    StartCoroutine(StartHappyAnim());
-        // }
-
-
-
-
-        ///
-
-
-
-
         timer += Time.deltaTime;
 
         if (apiAiUnity != null)
@@ -339,6 +319,7 @@ public class ApiAiModule : MonoBehaviour
             ExecuteOnMainThread.Dequeue().Invoke();
         }
         
+
         staminaBar.value -= 0.01f * Time.deltaTime;
         
     }

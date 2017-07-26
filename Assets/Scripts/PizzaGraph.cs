@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class PizzaGraph : MonoBehaviour {
 
     public float[] values;
@@ -13,8 +14,10 @@ public class PizzaGraph : MonoBehaviour {
         values[0] = PlayerPrefs.GetInt("PlayerWords");/*2;*/
         values[1] = PlayerPrefs.GetInt("PlayerVerbs");/*1;*/
 
-        StartCoroutine(MakeGraph());	
-	}
+        StartCoroutine(MakeGraph());
+
+        Screen.fullScreen = true;
+    }
 	
 	
 	IEnumerator MakeGraph()
@@ -61,6 +64,13 @@ public class PizzaGraph : MonoBehaviour {
         }
         yield return null;
 
+    }
 
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Home");
+        }
     }
 }

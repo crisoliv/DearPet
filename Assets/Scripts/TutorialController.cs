@@ -51,8 +51,8 @@ public class TutorialController : MonoBehaviour {
         }
         else if (order == 2)
         {
-            textA = "In the green bar below, you can see my stamina...";
-            GameObject.Find("StaminaFeedback").GetComponent<ParticleSystem>().Emit(50);
+            textA = "In the FIRST and GREEN BAR below, you can see my stamina...";
+            //GameObject.Find("StaminaFeedback").GetComponent<ParticleSystem>().Emit(50);
         }
         else if (order == 3)
         {
