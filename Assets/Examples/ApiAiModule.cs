@@ -76,8 +76,10 @@ public class ApiAiModule : MonoBehaviour
     int word;
     int verb;
     string returnFood;
+    string returnBathObj;
     Image foodImage;
     string[] foods = { "apple", "banana", "pizza", "broccoli", "carrot", "chocolat", "egg", "watermelon", "ice cream", "cake" };
+    string[] bathroomObj = { "soap", "sponge" };
     int index = 0;
 
     private readonly JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -90,6 +92,7 @@ public class ApiAiModule : MonoBehaviour
     // Use this for initialization
     IEnumerator Start()
     {
+          
         // check access to the Microphone
         yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
         if (!Application.HasUserAuthorization(UserAuthorization.Microphone))
@@ -116,11 +119,8 @@ public class ApiAiModule : MonoBehaviour
         returnFood = foods[index];
 
         answerTextField.color = Color.clear;
-        //sliderStamina = staminaBar.GetComponent<Slider>();   
+           
         timer = 0;
-
-        // audioSource.Play();
-
     }
 
     IEnumerator PlayAudioPart2()
@@ -142,23 +142,28 @@ public class ApiAiModule : MonoBehaviour
                 Debug.Log(outText);                
 
                 string text = aiResponse.Result.ResolvedQuery.ToLower();
-               
-                if (text.Contains(returnFood))
-                {
-                    word++;
-                    PlayerPrefs.SetInt("PlayerWords", word);
-                }
-                
-                if (text.Contains("eat"))
-                {
-                    verb++;
-                    PlayerPrefs.SetInt("PlayerVerbs", verb);
-                }
 
-                StartCoroutine(CorrectAnswer(text));
-                
+                // check what scene
+                if (Application.loadedLevelName == "Play")
+                {
+                    if (text.Contains(returnFood))
+                    {
+                        word++;
+                        PlayerPrefs.SetInt("PlayerWords", word);
+                    }
 
-                //answerTextField.text += " " + text + " "+ returnFood/*aiResponse.Result.ResolvedQuery*/;
+                    if (text.Contains("eat"))
+                    {
+                        verb++;
+                        PlayerPrefs.SetInt("PlayerVerbs", verb);
+                    }
+
+                    StartCoroutine(CorrectAnswer(text));
+                }
+                else
+                {
+
+                }                             
                 
             } else
             {
@@ -181,22 +186,11 @@ public class ApiAiModule : MonoBehaviour
 
             StartCoroutine(StaminaFeedbackUI());
 
-
-
-
-
-
-
-
-
-            ///
-
             if (index == 10)
             {
                 index = 0;
             }
             index++;
-            //foodImage.sprite = Resources.Load<Sprite>("Resources/" + returnFood);
 
             switch (index)
             {
@@ -260,7 +254,6 @@ public class ApiAiModule : MonoBehaviour
                     answerTextField.color = Color.clear;
                     break;
             }
-
 
             returnFood = foods[index];
             answerTextField.text = returnFood;
@@ -436,9 +429,6 @@ public class ApiAiModule : MonoBehaviour
             PlayerPrefs.SetInt("FirstApple", 1);
             PlayerPrefs.Save();
         }
-       
-       
-
 
         try
         {
