@@ -48,10 +48,15 @@ public class ApiAiModule : MonoBehaviour
     public AudioClip chocolateAudio;
     public AudioClip eggAudio;
     public AudioClip watermelonAudio;
-    public AudioClip icecreamAudio;    
+    public AudioClip icecreamAudio;
+
+    //ADD BATHROOM OBJECTS AUDIO
+    public AudioClip soapAudio;
+    public AudioClip spongeAudio;
 
     public AudioSource audioSource;
     public AudioSource audioSourceEAT;
+    public AudioSource audioSourceBATH;
     public AudioSource audioSourceCorrect;
 
     
@@ -66,6 +71,10 @@ public class ApiAiModule : MonoBehaviour
     public Sprite icecreamSprite;
     public Sprite cakeSprite;
     public GameObject foodItem;
+
+    public Sprite soapSprite;
+    public Sprite spongeSprite;
+    public GameObject bathObjItem;
 
     public GameObject happyWinPS;
     public Slider staminaBar;
@@ -88,7 +97,7 @@ public class ApiAiModule : MonoBehaviour
     };
 
     private readonly Queue<Action> ExecuteOnMainThread = new Queue<Action>();
-
+     
     // Use this for initialization
     IEnumerator Start()
     {
@@ -163,6 +172,20 @@ public class ApiAiModule : MonoBehaviour
                 else
                 {
 
+                    if (text.Contains(returnBathObj))
+                    {
+                        word++;
+                        PlayerPrefs.SetInt("PlayerWords", word);
+                    }
+
+                    if (text.Contains("take a bath using"))
+                    {
+                        verb++;
+                        PlayerPrefs.SetInt("PlayerVerbs", verb);
+                    }
+
+                    StartCoroutine(CorrectAnswer2(text));
+
                 }                             
                 
             } else
@@ -170,6 +193,62 @@ public class ApiAiModule : MonoBehaviour
                 Debug.LogError("Response is null");
             }
         });
+    }
+
+    IEnumerator CorrectAnswer2(string text)  // Called when user gives a correct answer.
+    {
+        if (text.Contains(returnFood) && text.Contains("eat"))
+        {
+            audioSourceCorrect.Play();
+
+            //yield return new WaitForSeconds(10);
+
+            ///Character jump animation.
+
+            StartCoroutine(StartHappyAnim());
+
+            StartCoroutine(StaminaFeedbackUI());
+
+            if (index == 2)
+            {
+                index = 0;
+            }
+            index++;
+
+            switch (index)
+            {
+                case 0:
+                    foodImage.sprite = soapSprite;
+                    bathObjItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = soapAudio;
+                    break;
+                case 1:
+                    foodImage.sprite = spongeSprite;
+                    bathObjItem.SetActive(true);
+                    answerTextField.color = Color.clear;
+                    audioSource.clip = spongeAudio;
+                    break;
+            }
+
+        returnBathObj = bathroomObj[index];
+        answerTextField.text = returnBathObj;
+        //answerTextField.text = "ACERTOU";
+        staminaBar.value += 0.25f;
+        }
+        else
+        {
+            answerTextField.color = Color.black;
+            bathObjItem.SetActive(false);
+            audioSourceBATH.Play();
+
+            timer = 0;
+
+            StartCoroutine(PlayAudioPart2());
+            //audioSource.Play();                                        
+            //answerTextField.text = "ERROU";
+        }
+        yield return null;
     }
 
     IEnumerator CorrectAnswer(string text)  // Called when user gives a correct answer.
