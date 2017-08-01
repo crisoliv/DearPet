@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\PizzaGraph.cs" />
     <Compile Include="Assets\Scripts\PlayControl.cs" />
     <Compile Include="Assets\Scripts\Splash.cs" />
+    <Compile Include="Assets\Scripts\Stick2.cs" />
     <Compile Include="Assets\Scripts\TutorialController.cs" />
     <Compile Include="Assets\Stick.cs" />
   </ItemGroup>
