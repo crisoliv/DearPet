@@ -31,6 +31,11 @@ public class HomeController : MonoBehaviour {
         SceneManager.LoadScene("Statistics");
 
     }
+    public void BtLogin()
+    {
+        SceneManager.LoadScene("Home");
+
+    }
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

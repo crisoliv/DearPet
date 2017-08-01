@@ -44,10 +44,10 @@ public class LoginController : MonoBehaviour {
 
 		yield return www.Send();
 
-		if(www.isNetworkError) {
+		/*if(www.isNetworkError) {
 			Debug.Log(www.error);
 		}
-		else {
+		else {*/
 
 			//string json = System.Text.Encoding.ASCII.GetString(www.downloadHandler.data);
 			string json = www.downloadHandler.text;
@@ -60,7 +60,7 @@ public class LoginController : MonoBehaviour {
 				SceneManager.LoadScene("Home");
 			}
 
-		}
+		//}
 
 	}
 }
