@@ -124,8 +124,16 @@ public class ApiAiModule : MonoBehaviour
         apiAiUnity.OnResult += HandleOnResult;
 
         foodImage = foodItem.GetComponent<Image>();
-        returnFood = foods[index];
-        returnBathObj = bathroomObj[index];
+        if (Application.loadedLevelName == "Play")
+        {
+            returnFood = foods[index];
+        }
+        else
+        {
+            returnBathObj = bathroomObj[index];
+            answerTextField.text = returnBathObj;
+            audioSource.clip = soapAudio;
+        }        
 
         answerTextField.color = Color.clear;
            
@@ -166,8 +174,7 @@ public class ApiAiModule : MonoBehaviour
                         verb++;
                         PlayerPrefs.SetInt("PlayerVerbs", verb);
                     }
-
-                    //audioSourceEAT.Play();
+                    
                     StartCoroutine(CorrectAnswer(text));
                 }
                 else
@@ -184,8 +191,7 @@ public class ApiAiModule : MonoBehaviour
                         verb++;
                         PlayerPrefs.SetInt("PlayerVerbs", verb);
                     }
-
-                    audioSourceBATH.Play();
+                    
                     StartCoroutine(CorrectAnswer2(text));
 
                 }                             
@@ -242,11 +248,17 @@ public class ApiAiModule : MonoBehaviour
         {
             answerTextField.color = Color.black;
             bathObjItem.SetActive(false);
-            audioSourceBATH.Play();
+            //audioSourceBATH.Play();
 
             timer = 0;
 
-            StartCoroutine(PlayAudioPart2());
+            //if(timer > 1)
+            //{
+                //audioSource.Play();
+            //}
+            
+            //StartCoroutine(PlayAudioPart2());
+            
             //audioSource.Play();                                        
             //answerTextField.text = "ERROU";
         }
@@ -362,8 +374,6 @@ public class ApiAiModule : MonoBehaviour
         GameObject.Find("StaminaFeedbackPS").GetComponent<ParticleSystem>().Emit(100);
        // yield return new WaitForSeconds(2);
 
-
-
         yield return null;
 
     }
@@ -373,7 +383,7 @@ public class ApiAiModule : MonoBehaviour
         RunInMainThread(() => {
             Debug.LogException(e.Exception);
             Debug.Log(e.ToString());
-            answerTextField.text = e.Exception.Message;
+            answerTextField.text = "Incorreto"/*e.Exception.Message*/;
         });
     }
     
@@ -394,7 +404,7 @@ public class ApiAiModule : MonoBehaviour
         }
         
 
-        staminaBar.value -= 0.01f * Time.deltaTime;
+        staminaBar.value -= 0.001f * Time.deltaTime;
         
     }
 
@@ -498,15 +508,34 @@ public class ApiAiModule : MonoBehaviour
 
     IEnumerator RunApi()
     {
-     
-        if (!PlayerPrefs.HasKey("FirstApple"))
+
+        if (Application.loadedLevelName == "Play")                
         {
+            yield return new WaitForSeconds(1.0F);
             audioSourceEAT.Play();
             yield return new WaitForSeconds(0.4F);
             audioSource.Play();
             yield return new WaitForSeconds(1.5F);
-            PlayerPrefs.SetInt("FirstApple", 1);
-            PlayerPrefs.Save();
+            //PlayerPrefs.SetInt("FirstApple", 1);
+            //PlayerPrefs.Save();
+        }
+        else
+        {
+            yield return new WaitForSeconds(1.0F);
+            audioSourceBATH.Play();
+            yield return new WaitForSeconds(2.0F);
+            if(index == 0)
+            {
+                audioSource.clip = soapAudio;
+            }
+            else
+            {
+                audioSource.clip = spongeAudio;
+            }            
+            audioSource.Play();
+            yield return new WaitForSeconds(1.5F);
+            //PlayerPrefs.SetInt("FirstApple", 1);
+            //PlayerPrefs.Save();
         }
 
         try

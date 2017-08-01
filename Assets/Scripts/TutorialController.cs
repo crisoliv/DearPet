@@ -11,15 +11,15 @@ public class TutorialController : MonoBehaviour {
 	void Start () {
 
         /*if (PlayerPrefs.HasKey("FirstTime"))    //Not the first time.
-        {
+        {*/
             StartGame();
-        }
+        /*}
         else // First time.
         {*/
-            textBox.transform.parent.gameObject.SetActive(true);
+            /*textBox.transform.parent.gameObject.SetActive(true);
             PlayerPrefs.SetInt("FirstTime",1);
             PlayerPrefs.Save();
-            RunTutorial();
+            RunTutorial();*/
         //}
     }
 
