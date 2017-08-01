@@ -217,11 +217,11 @@ public class ApiAiModule : MonoBehaviour
 
             StartCoroutine(StaminaFeedbackUI());
 
+            index++;
             if (index == 2)
             {
                 index = 0;
             }
-            index++;
 
             switch (index)
             {
@@ -279,11 +279,11 @@ public class ApiAiModule : MonoBehaviour
 
             StartCoroutine(StaminaFeedbackUI());
 
+            index++;
             if (index == 10)
             {
                 index = 0;
             }
-            index++;
 
             switch (index)
             {
@@ -404,7 +404,7 @@ public class ApiAiModule : MonoBehaviour
         }
         
 
-        staminaBar.value -= 0.001f * Time.deltaTime;
+        staminaBar.value -= 0.009f * Time.deltaTime;
         
     }
 

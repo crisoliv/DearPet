@@ -140,6 +140,11 @@ public class PlayControl : MonoBehaviour {
             nextItemCustom--;
         }
     }
+    public void BtBath()
+    {
+        SceneManager.LoadScene("PlayBath");
+
+    }
 
     private void LateUpdate()
     {
