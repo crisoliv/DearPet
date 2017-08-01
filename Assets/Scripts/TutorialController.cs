@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class TutorialController : MonoBehaviour {
 
     public Text textBox;
@@ -59,7 +60,7 @@ public class TutorialController : MonoBehaviour {
             else if (order == 5)
             {
 
-                textA = "When it starts to decrease too much, you should feed me! - Quando diminuir demais, me alimente!";
+                textA = "When it decrease too much, you should feed me! - Quando diminuir demais, me alimente!";
 
             }
             else if (order == 6)
@@ -112,7 +113,7 @@ public class TutorialController : MonoBehaviour {
             else if (order == 7)
             {
 
-                textA = "[...] - Para me alimentar, toque na comida acima e pronuncie corretamente!";
+                textA = "[...] - Para me dar banho, toque na objeto acima e pronuncie corretamente!";
                 
             }
             else
@@ -122,5 +123,13 @@ public class TutorialController : MonoBehaviour {
             }
         }
         textBox.text = textA;
+    }
+
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Home");
+        }
     }
 }

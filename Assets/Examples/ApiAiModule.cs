@@ -383,7 +383,7 @@ public class ApiAiModule : MonoBehaviour
         RunInMainThread(() => {
             Debug.LogException(e.Exception);
             Debug.Log(e.ToString());
-            answerTextField.text = "Incorreto"/*e.Exception.Message*/;
+            answerTextField.text = "Conexão Ruim"/*e.Exception.Message*/;
         });
     }
     

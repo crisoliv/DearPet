@@ -45,7 +45,7 @@ public class HomeController : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            SceneManager.LoadScene("Home");
         }
     }
 }
