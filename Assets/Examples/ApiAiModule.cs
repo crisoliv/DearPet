@@ -59,7 +59,6 @@ public class ApiAiModule : MonoBehaviour
     public AudioSource audioSourceBATH;
     public AudioSource audioSourceCorrect;
 
-    
     public Sprite appleSprite;
     public Sprite bananaSprite;
     public Sprite pizzaSprite;
@@ -126,6 +125,7 @@ public class ApiAiModule : MonoBehaviour
 
         foodImage = foodItem.GetComponent<Image>();
         returnFood = foods[index];
+        returnBathObj = bathroomObj[index];
 
         answerTextField.color = Color.clear;
            
@@ -167,6 +167,7 @@ public class ApiAiModule : MonoBehaviour
                         PlayerPrefs.SetInt("PlayerVerbs", verb);
                     }
 
+                    //audioSourceEAT.Play();
                     StartCoroutine(CorrectAnswer(text));
                 }
                 else
@@ -184,6 +185,7 @@ public class ApiAiModule : MonoBehaviour
                         PlayerPrefs.SetInt("PlayerVerbs", verb);
                     }
 
+                    audioSourceBATH.Play();
                     StartCoroutine(CorrectAnswer2(text));
 
                 }                             
@@ -197,7 +199,7 @@ public class ApiAiModule : MonoBehaviour
 
     IEnumerator CorrectAnswer2(string text)  // Called when user gives a correct answer.
     {
-        if (text.Contains(returnFood) && text.Contains("eat"))
+        if (text.Contains(returnBathObj) && text.Contains("take a bath using"))
         {
             audioSourceCorrect.Play();
 
@@ -492,8 +494,6 @@ public class ApiAiModule : MonoBehaviour
     public void StartNativeRecognition()
     {
         StartCoroutine(RunApi());
-      
-     
     }
 
     IEnumerator RunApi()

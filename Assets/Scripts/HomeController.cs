@@ -36,6 +36,11 @@ public class HomeController : MonoBehaviour {
         SceneManager.LoadScene("Home");
 
     }
+    public void BtBath()
+    {
+        SceneManager.LoadScene("PlayBath");
+
+    }
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
